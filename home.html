@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life below wawebsite</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .header {
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url(Images/5236.jpg);
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .text-box {
+            width: 90%;
+            color: #ffffff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .text-box h1 {
+            font-size: 62px;
+
+        }
+
+        .text-box P {
+            font-size: 105%;
+            margin: 20px 30px;
+            font-size: 14px;
+            color: #ffffff;
+
+        }
+
+        /*home page middle button*/
+        .middle-button {
+            display: inline-block;
+            text-decoration: none;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 12px 34px;
+            font-size: 13px;
+            background: transparent;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .middle-button:hover {
+            border: 1px solid #0b84a9;
+            /*chage this if you change the background*/
+            background: #0b84a9;
+            transition: 1s;
+
+        }
+
+        /*---------content1------------*/
+        .content1 {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: 600;
+
+        }
+
+        h2 {
+            margin-top: 5%;
+            font-size: 40px;
+            font-weight: 600;
+
+        }
+
+        h3 {
+
+            text-align: center;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+
+        p {
+            /*colour black*/
+            margin-top: 1%;
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 22px;
+            padding: 10px;
+        }
+
+
+        .rows {
+            margin-top: 5%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .colums {
+            /*course col*/
+            flex-basis: 30%;
+            background: #90bff2;
+            border-radius: 10px;
+            margin-bottom: 5%;
+            padding: 20px 12px;
+            box-sizing: content-box;
+        }
+
+        .colums:hover {
+            box-shadow: 0 0 20px 0px rgba(14, 27, 82, 0.7);
+
+        }
+
+        .photos {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+
+        /*content pages*/
+
+        .content-page {
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .animals {
+            flex-basis: 30%;
+            border-radius: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .row img {
+            max-width: 100%;
+            height: auto;
+        }
+
+
+
+        /* Added a rule to make the link take up the entire space of the .animals div */
+        .animals a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section class="header">
+        <nav>
+            <img src="Images/white_logo.PNG">
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="#mission1">MISSION</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                    <li><a href="feedback.html">FEEDBACK</a></li>
+                    <li><a href="team.html">ABOUT US</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="text-box">
+            <h1>Life Below Water</h1>
+            <p>lLife Below Water is one of the 17 Sustainable Development Goals (SDGs) established by the United Nations
+                in 2015.<br>
+                This goal seeks to conserve and sustainably use the oceans, seas, and marine resources for present and
+                future generations.</p>
+            <a href="#content1" class="middle-button">Visit Us to Know More</a>
+
+
+        </div>
+
+
+    </section>
+    <!----content----->
+    <section id="content1" class="content1">
+        <h1>What is life below Water?</h1>
+        <p>Life Below Water focuses on preserving the health and biodiversity of marine ecosystems, promoting
+            sustainable
+            fishing practices, reducing marine pollution,
+            and addressing the impacts of ocean acidification and climate change on aquatic life.
+            The goal recognizes the critical role that oceans and seas play in supporting life on Earth,
+            providing livelihoods for millions of people, and contributing to global food security, trade, and
+            transportation</p>
+        <div id="mission1" class="mission">
+            <h2>
+                Our Mission
+            </h2>
+            <p>Our mission is to raise awareness and drive action towards
+                achieving United Nations Sustainable Development Goal 14:
+                Life Below Water. We inspire participation in simple actions to preserve marine
+                ecosystems, combat ocean pollution, and promote sustainable use of ocean resources.
+
+            <div class="rows">
+                <div class="colums">
+                    <h2>Marine Protected <br> Areas</h3>
+                        <p>Establishing and expanding protected areas in oceans
+                            and seas to conserve marine biodiversity, safeguard critical habitats,
+                            and allow ecosystems to recover, ensures that vulnerable marine species
+                            and ecosystems have safe spaces to thrive and regenerate.
+                            These protected areas also serve as important research sites,
+                            helping scientists better understand marine ecosystems and
+                            informing more effective conservation strategies.</p>
+                </div>
+                <div class="colums">
+                    <h2>Ocean <br>Cleanup Projects</h2>
+                    <p>Initiatives focused on reducing marine pollution, including plastics, oil spills,
+                        and other contaminants, to maintain the integrity of marine ecosystems and protect marine
+                        life, play a crucial role in preserving the health of oceans and preventing harm to marine
+                        species caused by pollution. These projects not only clean up existing pollution but also
+                        raise awareness about the importance of waste reduction and responsible waste disposal
+                        to prevent further marine contamination.</p>
+                </div>
+                <div class="colums">
+                    <h2>Sustainable Fisheries <br> Management</h2>
+                    <p>Implementing responsible fishing practices to prevent overfishing,
+                        protect endangered species, and support the livelihoods of fishing communities,
+                        helps maintain fish populations at sustainable levels and ensures the long-term
+                        viability of the fishing industry. It also promotes ecosystem resilience, as balanced
+                        fish populations contribute to healthier marin
+                        e food webs and enhance and the overall health
+                        of ocean ecosystems.
+                    </p>
+                </div>
+
+            </div>
+    </section>
+    </section>
+
+
+
+    <section class="content-page">
+        <h2>"Life Below the Surface: <br>Exploring the Wonders and Challenges of Marine Environments"</h2><br>
+        <h3>Click images to see more!!</h3><br><br>
+
+        <div class="row">
+
+            <div class="animals">
+                <a href="pollution_content.html">
+                    <img src="Images/pollution.jpg" alt="Image 2">
+
+                </a>
+                <p>Sea Pollution</p>
+                <div class="layer"></div>
+            </div>
+            <div class="animals">
+                <a href="content.html">
+                    <img src="Images/Life2.jpg" alt="Image 1">
+                </a>
+                <p>Sea Animals</p>
+                <div class="layer"></div>
+            </div>
+
+            <div class="animals">
+                <a href="takeAction.html">
+                    <img src="Images/takeaction.jpg" alt="Image 3">
+                </a>
+                <p>Taking Action</p>
+
+                <div class="layer"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!---footer-->
+    <footer>
+        <div class="footer-content">
+            <p>Life Below Water &copy; 2024. All rights reserved.</p>
+            <ul class="social-icons">
+                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            <p class="page-editor-link"><a href="page_editor.html">Page Editor</a></p>
+        </div>
+    </footer>
+    <footer>
+        <div class="footer-content">
+
+        </div>
+
+    </footer>
+</body>
+
+</html>

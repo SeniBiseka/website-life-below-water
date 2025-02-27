@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .category1,.category2,.category3,.category4 {  /*Styling for the custom prompt*/
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /*Change overflow to hidden to prevent scrolling*/
+        }
+
+        .category1::before,.category2::before,.category3::before,.category4::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("Images/image1.jpg");
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .content,.studyContent,.volunteerContent,.contactContent {
+            padding: 40px;
+            border: 4px solid #dada28;
+            width: 80%;
+            max-width: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {  /*Close button for the custom prompt */
+            color: #dada28;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        h1,
+        p {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .output-box1,.output-box2,.output-box3,.output-box4 {
+            display: none;  /*Initially hide the output box*/    
+            padding: 25px;
+            border-radius: 5px;
+            width: 33%;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid black;  
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: #41c0d6;
+            background-image: linear-gradient(175deg, rgb(0 0 0 / 0%) 95%, #8da389 95%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 95%, #8da389 95%),
+                linear-gradient(175deg, rgb(0 0 0 / 0%) 90%, #b4b07f 90%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 92%, #b4b07f 92%),
+                linear-gradient(175deg, rgb(0 0 0 / 0%) 85%, #c5a68e 85%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 89%, #c5a68e 89%),
+                linear-gradient(175deg, rgb(0 0 0 / 0%) 80%, #ba9499 80%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 86%, #ba9499 86%),
+                linear-gradient(175deg, rgb(0 0 0 / 0%) 75%, #9f8fa4 75%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 83%, #9f8fa4 83%),
+                linear-gradient(175deg, rgb(0 0 0 / 0%) 70%, #74a6ae 70%),
+                linear-gradient(85deg, rgb(0 0 0 / 0%) 80%, #74a6ae 80%);
+        }
+
+        .next {
+            margin-top: 30px;
+            padding: 10px 15px;
+            font-weight: bold;
+            background-color: rgb(87, 150, 87);
+            border: 3px solid #f5f521;
+        }
+
+        .next:hover,
+        .skip:hover {
+            color: rgb(79, 76, 76);
+            cursor: pointer;
+        }
+
+        .skip {
+            margin-top: 30px;
+            margin-left: 10px;
+            padding: 10px 15px;
+            font-weight: bold;
+            background-color: rgb(177, 106, 117);
+            border: 3px solid #f5f521;
+        }
+
+        .sub {
+            margin-left: 360px;
+            padding: 10px 15px;
+            font-weight: bold;
+            background-color: rgb(49, 119, 61);
+            cursor: pointer;
+            position: absolute;
+            border-radius: 100px;
+            color: white;
+            text-align: center;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(142, 151, 181, 0.5),rgba(143, 150, 177, 0.5)), url(Images/image2.jpg);
+            background-size: cover;
+        }
+
+        .popup {
+            width: 400px;
+            background: #fff;
+            border-radius: 6px;
+            position: absolute;
+            top: 0;  /*box moves up*/            
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.1);  /*to add the center of the web page and make its scale into small*/
+            text-align: center;
+            padding: 0 30px 30px;
+            color: #333;
+            visibility: hidden;
+            transition: transform 0.4s, top 0.4s;
+        }
+
+        .popup img {
+            width: 100px;
+            margin-top: -50px;  /*image moves up*/           
+            border-radius: 50%;
+            box-shadow: 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .open-popup {
+            visibility: visible;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1);   /*change scale to original size*/
+        }
+
+        .popup h2 {
+            font-size: 38px;
+            font-weight: 500;
+            margin: 30px 0 10px;
+        }
+
+        .popup button {   /*ok button*/
+            width: 100%;
+            margin-top: 50px;
+            padding: 10px;
+            background: #3c901e;
+            color: #fff;
+            border: 0;
+            outline: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #button {
+            display: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            background-color: rgb(49, 119, 61);
+            cursor: pointer;
+            position: absolute;
+            border-radius: 100px;
+            color: white;
+            text-align: center;
+            top: 300px;
+            left: 75%;
+            transform: translateX(-50%);
+            font-weight: bold;
+        }
+
+        #progress {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: none;
+        }
+
+        #progressText {
+            font-weight: bold;
+        }
+
+        #progressPercentage {
+            color: black;
+        }
+
+        #progressBar {
+            width: 100%;
+            height: 10px;
+            appearance: none;
+            border: none;
+            background-color: gray;
+        }
+
+        #signUpButton {
+            background-color: #113f61;
+            border: 0;
+            border-radius: 56px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 16px 21px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 100px;
+            margin-left: 665px;
+            touch-action: manipulation;
+            padding: 16px 48px;
+        }
+
+        #signUpButton:before {
+            background-color: initial;
+            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+            border-radius: 125px;
+            content: "";
+            height: 50%;
+            left: 4%;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            transition: all .3s;
+            width: 92%;
+        }
+
+        #signUpButton:hover {
+            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+            transform: scale(1.05);
+        }
+
+        .b1,.b2,.b3 {
+            align-items: center;
+            background-color: #174785;
+            border-radius: 100px;
+            box-sizing: border-box;
+            color: white;
+            display: inline-flex;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+            margin-left: 330px;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-links ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links ul li::after {
+            content: "";
+            bottom: 0%;
+            left: 0%;
+            width: 0%;
+            height: 2px;
+            background-color: black;
+            display: block;
+            margin: auto;
+            transition: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="Images/logo_black.png" alt="logo">
+        <div class="nav-links">
+            <ul>
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="home.html#mission1">MISSION</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="feedback.html">FEEDBACK</a></li>
+                <li><a href="team.html">ABOUT US</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page">
+        <div id="step1">
+            <div id="progress">
+                <span id="progressText">Profile Completed: <span id="progressPercentage">0%</span></span>
+                <progress id="progressBar" max="100" value="0"></progress>
+            </div>
+
+            <script>
+                function updateProgress(progress) {
+                    const progressBar = document.getElementById('progressBar');
+                    const progressPercentage = document.getElementById('progressPercentage');
+
+                    progressBar.value = progress;
+                    progressPercentage.textContent = progress + '%';
+                }
+            </script>
+
+            <h1><strong>WELCOME TO WAVES!</strong></h1><br>
+            <p>Ready to save lives?<br>
+                Empower hope by extending your hand today, saving lives, and illuminating the depths of compassion.</p>
+            <button id="signUpButton" onclick="showNamePrompt()">Sign up</button><br>
+
+            <div class="output-box1" id="outputBox1">
+                <h2>Personal details</h2>
+                <span id="q1"></span><br>
+                <span id="q2"></span><br>
+                <span id="q3"></span><br>
+                <span id="q4"></span><br>
+                <button id="button2" class="b1" onclick="showStudyPrompt()">Go to step 2</button><br>
+            </div>
+
+            <div id="namePrompt" class="category1"> <!-- The custom prompt for name -->
+                <div class="content">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="name">Enter your name:</label><br>
+                    <input type="text" id="name"><br>
+                    <button onclick="submitName()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div><br>
+
+            <div id="addressPrompt" class="category1"> <!-- The custom prompt for address -->
+                <div class="content">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="address">Enter your address:</label><br>
+                    <input type="text" id="address"><br>
+                    <button onclick="submitAddress()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div><br>
+
+            <div id="agePrompt" class="category1"> <!-- The custom prompt for age -->
+                <div class="content">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="age">Enter your age:</label><br>
+                    <input type="text" id="age"><br>
+                    <button onclick="submitAge()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div><br>
+
+            <div id="genderPrompt" class="category1"> <!-- The custom prompt for gender -->
+                <div class="content">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="gender">Enter your gender(Male/Female):</label><br>
+                    <input type="text" id="gender"><br>
+                    <button onclick="submitGender()" class="next">Submit</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function showNamePrompt() {    //Function to display the name prompt
+                document.getElementById('namePrompt').style.display = "block";
+                document.getElementById('name').focus();    //Autofocus on the input field
+            }
+
+            function showAddressPrompt() {    //Function to display the address prompt
+                document.getElementById('addressPrompt').style.display = "block";
+                document.getElementById('address').focus();
+            }
+            function showAgePrompt() {    //Function to display the age prompt
+                document.getElementById('agePrompt').style.display = "block";
+                document.getElementById('age').focus();
+            }
+            function showGenderPrompt() {    //Function to display the gender prompt
+                document.getElementById('genderPrompt').style.display = "block";
+                document.getElementById('gender').focus();
+                updateProgress(25);
+                document.getElementById('progress').style.display = "block";
+            }
+
+            function closePrompt() {    //Function to close the custom prompt
+                const prompts = ['name', 'address', 'age', 'gender', 'study', 'degree', 'uni', 'year', 'country', 'skills', 'experience', 'purpose', 'contribution', 'contraints', 'availability', 'hours', 'tel', 'email'];
+                prompts.forEach(prompt => {
+                    document.getElementById(prompt + 'Prompt').style.display = "none";
+                });
+            }
+            function submitName() {
+                let name = document.getElementById('name').value;
+                document.getElementById("q1").innerHTML = "Name: " + name;
+                closePrompt();
+                showAddressPrompt();
+            }
+
+            function submitAddress() {    //Function to submit the address entered in the custom prompt
+                let address = document.getElementById('address').value;
+                document.getElementById("q2").innerHTML = "Address: " + address;
+                closePrompt();
+                showAgePrompt();
+            }
+
+            function submitAge() {    
+                let age = document.getElementById('age').value;
+                document.getElementById("q3").innerHTML = "Age: " + age;
+                closePrompt();
+                showGenderPrompt();
+            }
+
+            function submitGender() {    
+                let gender = document.getElementById('gender').value;
+                document.getElementById("q4").innerHTML = "Gender: " + gender;
+                closePrompt();
+                document.getElementById('signUpButton').style.display = "none"; // Hide the start button
+                document.getElementById('outputBox1').style.display = "block";  // Display the output box
+            }
+        </script><br>
+
+        <div id="step2">
+            <div class="output-box2" id="outputBox2">
+                <h2>Qualifications</h2>
+                <span id="ques1"></span><br>
+                <span id="ques2"></span><br>
+                <span id="ques3"></span><br>
+                <span id="ques4"></span><br>
+                <span id="ques5"></span><br>
+                <button id="button3" class="b2" onclick="showSkillsPrompt()">Go to step 3</button><br>
+            </div>
+
+            <div id="studyPrompt" class="category2"> <!-- The custom prompt for study area -->
+                <div class="studyContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="study">Enter which area you have studied:</label><br>
+                    <input type="text" id="study"><br>
+                    <button onclick="submitStudy()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="degreePrompt" class="category2"> <!-- The custom prompt for degree -->
+                <div class="studyContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="degree">Enter the highest degree you got:</label><br>
+                    <input type="text" id="degree"><br>
+                    <button onclick="submitDegree()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="uniPrompt" class="category2"> <!-- The custom prompt for university -->
+                <div class="studyContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="uni">Enter the university/institution:</label><br>
+                    <input type="text" id="uni"><br>
+                    <button onclick="submitUni()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="yearPrompt" class="category2"> <!-- The custom prompt for completion year -->
+                <div class="studyContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="year">Enter the degree completion year:</label><br>
+                    <input type="text" id="year"><br>
+                    <button onclick="submitYear()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="countryPrompt" class="category2"> <!-- The custom prompt for country -->
+                <div class="studyContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="country">Enter the country:</label><br>
+                    <input type="text" id="country"><br>
+                    <button onclick="submitCountry()" class="next">Submit</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            function showStudyPrompt() {    //Function to display the study prompt
+                document.getElementById('studyPrompt').style.display = "block";    //Display the study prompt
+                document.getElementById('study').focus();    //Autofocus on the input field
+            }
+
+            function submitStudy() { 
+                let study = document.getElementById('study').value;
+                document.getElementById("ques1").innerHTML = "Study area: " + study;
+                closePrompt();
+                showDegreePrompt();
+            }
+
+            function showDegreePrompt() {
+                document.getElementById('degreePrompt').style.display = "block"; // Display the degree prompt
+                document.getElementById('degree').focus(); // Autofocus on the input field
+            }
+
+            function submitDegree() {
+                let degree = document.getElementById('degree').value;
+                document.getElementById("ques2").innerHTML = "Highest degree: " + degree;
+                closePrompt();
+                showUniPrompt();
+            }
+
+            function showUniPrompt() {
+                document.getElementById('uniPrompt').style.display = "block";
+                document.getElementById('uni').focus();
+            }
+
+            function submitUni() {
+                let uni = document.getElementById('uni').value;
+                document.getElementById("ques3").innerHTML = "University/Institution: " + uni;
+                closePrompt();
+                showYearPrompt();
+            }
+
+            function showYearPrompt() {
+                document.getElementById('yearPrompt').style.display = "block";
+                document.getElementById('year').focus();
+            }
+
+            function submitYear() {
+                let year = document.getElementById('year').value;
+                document.getElementById("ques4").innerHTML = "Completion year: " + year;
+                closePrompt();
+                showCountryPrompt();
+            }
+
+            function showCountryPrompt() {
+                document.getElementById('countryPrompt').style.display = "block";
+                document.getElementById('country').focus();
+                updateProgress(50);
+                document.getElementById('progress').style.display = "block";
+            }
+
+            function submitCountry() {
+                let country = document.getElementById('country').value;
+                document.getElementById("ques5").innerHTML = "Country: " + country;
+                closePrompt();
+                document.getElementById('outputBox1').style.display = "none";    //Hide output box of step 1
+                document.getElementById('outputBox2').style.display = "block";   //Display output box of step 2
+                document.getElementById('signUpButton').style.display = "none";  //Optionally, hide other elements related to step 1
+                document.getElementById('step2Button').style.display = "none";
+            }
+
+        </script><br>
+
+        <div id="step3"> <!-- Step 3: Prompts-->
+            <div class="output-box3" id="outputBox3">
+                <h2>Volunteering tasks</h2>
+                <span id="task1"></span><br>
+                <span id="task2"></span><br>
+                <span id="task3"></span><br>
+                <span id="task4"></span><br>
+                <span id="task5"></span><br>
+                <button id="button4" class="b3" onclick="showAvailabilityPrompt()">Go to step 4</button><br>
+            </div>
+
+            <div id="skillsPrompt" class="category3"> <!-- The custom prompt for skills -->
+                <div class="volunteerContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="skills">What skiils do you have for this task?</label><br>
+                    <input type="text" id="skills"><br>
+                    <button onclick="submitSkills()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="experiencePrompt" class="category3"> <!-- The custom prompt for experience -->
+                <div class="volunteerContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="experience">Do you have any previous volunteering experience?</label><br>
+                    <input type="text" id="experience"><br>
+                    <button onclick="submitExperience()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="purposePrompt" class="category3"> <!-- The custom prompt for purpose -->
+                <div class="volunteerContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="purpose">Why do you want to volunteer?</label><br>
+                    <input type="text" id="purpose"><br>
+                    <button onclick="submitPurpose()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="contributionPrompt" class="category3"> <!-- The custom prompt for contribution -->
+                <div class="volunteerContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="contribution">How do you plan to contribute?</label><br>
+                    <input type="text" id="contribution"><br>
+                    <button onclick="submitContribution()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="contraintsPrompt" class="category3"> <!-- The custom prompt for contraints -->
+                <div class="volunteerContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="contraints">Do you have any contraints?</label><br>
+                    <input type="text" id="contraints"><br>
+                    <button onclick="submitContraints()" class="next">Submit</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function showSkillsPrompt() {    //Function to display the skills prompt 
+                document.getElementById('skillsPrompt').style.display = "block"; // Display the study prompt
+                document.getElementById('skills').focus();    //Autofocus on the input field
+            }
+
+            function submitSkills() {    //Function to submit the skills entered in the custom prompt
+                let skills = document.getElementById('skills').value;
+                document.getElementById("task1").innerHTML = "Skills: " + skills;
+                closePrompt();
+                showExperiencePrompt();
+            }
+
+            function showExperiencePrompt() {
+                document.getElementById('experiencePrompt').style.display = "block"; // Display the degree prompt
+                document.getElementById('experience').focus(); //Autofocus on the input field
+            }
+
+            function submitExperience() {
+                let experience = document.getElementById('experience').value;
+                document.getElementById("task2").innerHTML = "Experience: " + experience;
+                closePrompt();
+                showPurposePrompt();
+            }
+
+            function showPurposePrompt() {
+                document.getElementById('purposePrompt').style.display = "block";
+                document.getElementById('purpose').focus();
+            }
+
+            function submitPurpose() {
+                let purpose = document.getElementById('purpose').value;
+                document.getElementById("task3").innerHTML = "Purpose: " + purpose;
+                closePrompt();
+                showContributionPrompt();
+            }
+
+            function showContributionPrompt() {
+                document.getElementById('contributionPrompt').style.display = "block";
+                document.getElementById('contribution').focus();
+            }
+
+            function submitContribution() {
+                let contribution = document.getElementById('contribution').value;
+                document.getElementById("task4").innerHTML = "Contribution: " + contribution;
+                closePrompt();
+                showContraintsPrompt();
+            }
+
+            function showContraintsPrompt() {
+                document.getElementById('contraintsPrompt').style.display = "block";
+                document.getElementById('contraints').focus();
+                updateProgress(75);
+                document.getElementById('progress').style.display = "block";
+            }
+
+            function submitContraints() {
+                let contraints = document.getElementById('contraints').value;
+                document.getElementById("task5").innerHTML = "Contraints: " + contraints;
+                closePrompt();
+                document.getElementById('outputBox2').style.display = "none";
+                document.getElementById('outputBox3').style.display = "block";
+                document.getElementById('signUpButton').style.display = "none";
+                document.getElementById('step3Button').style.display = "none";
+            }
+
+        </script> <br>
+
+        <div id="step4"> <!-- Step 4: Prompts-->
+            <div class="output-box4" id="outputBox4">
+                <h2>Availability and contacts</h2>
+                <span id="a1"></span><br>
+                <span id="a2"></span><br>
+                <span id="a3"></span><br>
+                <span id="a4"></span><br>
+                <button id="submit" class="sub" onclick="feedback()">Submit</button><br>
+            </div>
+
+            <div id="availabilityPrompt" class="category4"> <!-- The custom prompt for available days -->
+                <div class="contactContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="availability">Available days for volunteering:</label><br>
+                    <input type="text" id="availability"><br>
+                    <button onclick="submitAvailability()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="hoursPrompt" class="category4"> <!-- The custom prompt for available hours -->
+                <div class="contactContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="hours">Available hours per week:</label><br>
+                    <input type="text" id="hours"><br>
+                    <button onclick="submitHours()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="telPrompt" class="category4"><!-- The custom prompt for telephone -->
+                <div class="contactContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="tel">Contact No:</label><br>
+                    <input type="text" id="tel"><br>
+                    <button onclick="submitTel()" class="next">Next</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+
+            <div id="emailPrompt" class="category4"> <!-- The custom prompt for email -->
+                <div class="contactContent">
+                    <span class="close" onclick="closePrompt()">&times;</span>
+                    <label for="email">Email</label><br>
+                    <input type="text" id="email"><br>
+                    <button onclick="submitEmail()" class="next">Submit</button>
+                    <button onclick="skip()" class="skip">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function showAvailabilityPrompt() {    //Function to display the skills prompt
+                document.getElementById('availabilityPrompt').style.display = "block";
+                document.getElementById('availability').focus();
+            }
+
+            function submitAvailability() {
+                let availability = document.getElementById('availability').value;
+                document.getElementById("a1").innerHTML = "Available days: " + availability;
+                closePrompt();
+                showHoursPrompt();
+            }
+
+            function showHoursPrompt() {
+                document.getElementById('hoursPrompt').style.display = "block";
+                document.getElementById('hours').focus();
+            }
+
+            function submitHours() {
+                let hours = document.getElementById('hours').value;
+                document.getElementById("a2").innerHTML = "Available hours: " + hours;
+                closePrompt();
+                showTelPrompt();
+            }
+
+            function showTelPrompt() {
+                document.getElementById('telPrompt').style.display = "block";
+                document.getElementById('tel').focus();
+            }
+
+            function submitTel() {
+                let tel = document.getElementById('tel').value;
+                document.getElementById("a3").innerHTML = "Contact No: " + tel;
+                closePrompt();
+                showEmailPrompt();
+            }
+
+            function showEmailPrompt() {
+                document.getElementById('emailPrompt').style.display = "block";
+                document.getElementById('email').focus();
+                updateProgress(100);
+                document.getElementById('progress').style.display = "block";
+            }
+
+            function submitEmail() {
+                let email = document.getElementById('email').value;
+                document.getElementById("a4").innerHTML = "Email: " + email;
+                closePrompt();
+                document.getElementById('outputBox3').style.display = "none";
+                document.getElementById('outputBox4').style.display = "block";
+                document.getElementById('signUpButton').style.display = "none";
+                document.getElementById('step4Button').style.display = "none";
+            }
+
+        </script>
+
+        <script>
+
+            function feedback() {
+                document.getElementById('outputBox1').style.display = "block";
+                document.getElementById('outputBox2').style.display = "block";
+                document.getElementById('outputBox3').style.display = "block";
+                document.getElementById('outputBox4').style.display = "block";
+                document.getElementById('button').style.display = "block";
+                document.getElementById('button2').style.display = "none";
+                document.getElementById('button3').style.display = "none";
+                document.getElementById('button4').style.display = "none";
+                document.getElementById('submit').style.display = "none";
+                document.getElementById('progress').style.display = "none";
+            }
+        </script>
+
+    </div>
+
+    <button type="submit" class="button" id="button" onclick="openPopup()">Confirm</button>
+    <div class="container">
+        <div class="popup" id="popup">
+            <img src="Images/tick.jpg" alt="tick">
+            <h2>Thank You!</h2>
+            <p>Your details has been successfully submitted. Thanks!</p>
+            <button type="button" onclick="closePopup()">Ok</button>
+        </div>
+    </div>
+
+    <script>
+        let popup = document.getElementById("popup");
+        function openPopup() {    //display the popup
+            document.getElementById('page').style.display = "none";
+            document.getElementById('button').style.display = "none";
+            popup.classList.add("open-popup");
+        }
+
+        function closePopup() {    //Close the popup
+            popup.classList.remove("open-popup");
+            resetPrompts();
+        }
+
+        function resetPrompts() {
+            document.getElementById('signUpButton').style.display = "block";
+            document.getElementById('page').style.display = "block";
+            document.getElementById('outputBox1').style.display = "none";
+            document.getElementById('outputBox2').style.display = "none";
+            document.getElementById('outputBox3').style.display = "none";
+            document.getElementById('outputBox4').style.display = "none";
+            document.getElementById('button').style.display = "none";
+            document.getElementById('progress').style.display = "none";
+        }
+
+    </script>
+
+    <script>
+        let currentPromptIndex = 0;   //Track the index of the current prompt
+
+        function skip() {
+            const prompts = ['name', 'address', 'age', 'gender', 'study', 'degree', 'uni', 'year', 'country', 'skills', 'experience', 'purpose', 'contribution', 'contraints', 'availability', 'hours', 'tel', 'email'];
+            document.getElementById(prompts[currentPromptIndex] + 'Prompt').style.display = "none";    //Hide current prompt
+            currentPromptIndex++; // Move to the next prompt
+            if (currentPromptIndex < prompts.length) {
+                document.getElementById(prompts[currentPromptIndex] + 'Prompt').style.display = "block";    //Show next prompt
+            } else {
+                closePrompt(); // Close all prompts if there are no more prompts
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Feedback Form</title>
+    <style>
+        .header {
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url('Images/5359559.jpg');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            /*font stile*/
+            font-weight: 500;
+            font-style: normal;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7));
+        }
+
+        .fullform {
+            background-image: url('Images/5359559.jpg');
+            /* Path to image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 50%;
+            background-color: rgba(16, 43, 152, 0.7);
+            /* Semi-transparent background color */
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+            color: #ffffff;
+            /* Text color */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+            /* Text color */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .rating-buttons {
+            text-align: center;
+        }
+
+        .rating-buttons input[type="radio"] {
+            display: none;
+        }
+
+        .rating-buttons label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .rating-buttons input[type="radio"]:checked+label {
+            background-color: #0056b3;
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var rating = document.querySelector('input[name="rating"]:checked');
+            var comment = document.getElementById('comment').value;
+
+            if (!name || !rating ||!comment) {
+                event.preventDefault();
+                alert('Please fill in all required fields.');
+            }
+
+            if (email && !validateEmail(email)) {
+                event.preventDefault();
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+    </script>
+    <section class="header">
+        <nav>
+            <img src="Images/white_logo.PNG">
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="#mission1">MISSION</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                    <li><a href="feedback.html">FEEDBACK</a></li>
+                    <li><a href="team.html">ABOUT US</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="fullform">
+            <div class="container">
+                <h1>Feedback Form</h1>
+                <form id="feedbackForm" action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <div class="rating-buttons">
+                            <input type="radio" id="rating1" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            <input type="radio" id="rating2" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input type="radio" id="rating3" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input type="radio" id="rating4" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input type="radio" id="rating5" name="rating" value="5">
+                            <label for="rating5">5</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea id="comment" name="comment" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-content">
+                <p>Life Below Water &copy; 2024. All rights reserved.</p>
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+                <p class="page-editor-link"><a href="page_editor.html">Page Editor</a></p>
+            </div>
+        </footer>
+    
+</body>
+
+</html>
