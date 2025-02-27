@@ -21,10 +21,17 @@ I contributed to the following sections of the website:
 - Shop (shop.html): Designed a shop with product listings, a shopping cart, and JavaScript-based checkout form validation.
 - Take Action (takeAction.html): Developed a content page with pollution prevention measures using HTML and CSS.
 - Page Editor (pageEditorSeni.html): Created a simple webpage using HTML and CSS.
+
+
+## Technologies Used
+
+- HTML – Structure of the web pages.
+- CSS – Styling and layout.
+- JavaScript – Interactive elements, form validation, and user inputs.
+
 ## Installation
 
 1. Clone the repository:
-
 ```bash
 https://github.com/SeniBiseka/website-life-below-water.git
 ```
