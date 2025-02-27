@@ -1,5 +1,4 @@
-
-# website-life-below-water
+# Life Below Water - UNSDG Website
 
 This website was developed to introduce and promote awareness about Life Below Water, one of the 17 United Nations Sustainable Development Goals (UNSDGs). The site provides information about ocean pollution, pollution prevention, and sea animals. It was built using HTML, CSS, and JavaScript as a collaborative project by a team of three members.
 
