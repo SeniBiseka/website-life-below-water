@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor-SENI</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4eef5;
+            margin-bottom: 0;
+        }
+
+        header {
+            background-color: #864cad;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .picture {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .picture img{
+            width: 300px;
+            border-radius: 100%;
+        }
+
+        .details {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details h3 {
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .myWork {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .myWork .Topic {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .myWork h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .myWork .ss,
+        .myWork .shop,
+        .myWork .content {
+            padding: 50px;
+            margin-bottom: 20px;
+        }
+
+        .myWork h2 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .myWork p {
+            text-align: center;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .myWork{
+            background-color: rgb(230, 202, 250);
+        }
+        .details{
+            background-color: rgb(236, 204, 236);
+        }
+        .ss,.content{
+            background-color: plum;
+            border-radius: 50px;
+        }
+        .shop{
+            background-color: rgb(240, 185, 240);
+            border-radius: 50px;
+        }
+        footer{
+            background-color: #864cad;
+            color: #f4eef5;
+        }
+        footer li{
+            color: #f4eef5;
+            padding: 50px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Page Editor</h1>
+    </header>
+    <section class="picture" id="top">
+        <img src="Images/seni.jpg" alt="seni profile">
+    </section>
+    <section class="details">
+        <h3>Name   : B C P Seni Biseka Peiris <br> <br>
+            UOW ID : w2053112 <br> <br>
+            IIT ID : 20232416 <br> <br>
+            Role   : Student 1 <br> <br>
+        </h3>
+        <p><a href="#bottom">Jump to bottom</a></p>
+    </section>
+
+    <section class="myWork">
+        <div class="Topic"><h1>My Work</h1></div>
+
+        <section class="ss">
+            <h2>The Splash Screen</h2>
+            <p>Created a Splash screen as the initial introduction to our website using HTML, CSS and JavaScript. <br> <br>
+                Visit my <a href="splash.html">Splash Screen</a>.
+            </p>
+        </section>
+
+        <section class="shop">
+            <h2>The Shop</h2>
+            <p>Created a shop for our website. It consists of a section of products, a shopping cart and the checkout form. I used JavaScript to display the cart and validate the checkout form. <br> <br>
+                Visit my <a href="shop.html">Shop</a>.
+            </p>
+        </section>
+
+        <section class="content" id="bottom">
+            <h2>Take Action</h2>
+            <p>Created a content page for our website titled Life Below Water. The content consists of ways to stop the pollution. Used HTML to create the website and CSS for styling. <br><br>
+                Visit my content page <a href="takeAction.html">Take Action</a>.
+            </p> <br> <br>
+            <p><a href="#top">Jump to the top</a></p>
+        </section>
+
+    </section>
+    <footer>
+        <ul>
+            <li><p>Life Below Water &copy; 2024. All rights reserved.</p></li>
+            <li class="ss-foot"> <a href="splash.html">Splash Screen</a></li>
+            <li class="shop-foot"> <a href="shop.html">Shop</a></li>
+            <li class="takeAction"> <a href="takeAction.html">Take Action</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

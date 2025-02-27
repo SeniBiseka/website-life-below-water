@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+  <title>Splash Screen example</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: linear-gradient(rgba(142, 151, 181, 0.7),rgba(143, 150, 177, 0.7)), url(Images/splashscreen1.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+    .splash-container {
+        font-family: "Montserrat", sans-serif; 
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .mission,
+    .members {
+      display: none;
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /*loader image style************************************/
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  position: fixed;
+  top: 60%;
+  width: 90%;
+  height: 2px;
+  background:
+   linear-gradient(#051841 0 0) 0/0% no-repeat
+   #ddd;
+  animation: l1 4s infinite linear; 
+}
+@keyframes l1 {
+    100% {background-size:100%}
+}
+/********************************************************/
+
+h1,h2{
+    color: rgb(8, 36, 66);
+}
+ul li{
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 50px;
+}
+h2{
+    margin: 5px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="splash-container">
+    <div class="title">United Nations Sustainable Development Goals<br>
+         <h2 style="margin: 0;">Goal 14:</h2> <h1 style="margin: 0;"><b>Life Below Water</b></h1></div>
+    <div class="mission"> 
+        <h2>UNSD Goal 14:</h2> <p style="font-size: xx-large; color: rgb(8, 36, 66);"> <b>Life Below Water</b></p> <br>
+        <h2>Our mission</h2>
+        <p>Our mission is to raise awareness and drive action towards achieving 
+            United Nations Sustainable Development Goal 14: Life Below Water. 
+            We inspire participation in simple actions to preserve marine 
+            ecosystems, combat ocean pollution, and promote sustainable use 
+            of ocean resources. <br></p></div>
+            
+                <div class="loader"></div>
+
+    <div class="members"> <h2>We are G17 - 7</h2><br>
+        <ul>
+            <li>SENI PEIRIS</li>
+            <li>DULITHA KARIYAPPERUMA</li>
+            <li>DILKI ATTANAYAKE</li>
+        </ul>
+    </div>
+    
+  </div>
+
+  <script>
+
+    // Function to show mission and group members after 2 seconds
+    setTimeout(function() {
+      document.querySelector('.title').style.display = 'none';
+      document.querySelector('.mission').style.display = 'block';
+      document.querySelector('.members').style.display = 'block';
+    }, 1000);
+ 
+    // Function to redirect after another 2 seconds (total 4 seconds)
+    setTimeout(function() {
+      window.location.href = "home.html";
+    }, 4000);
+  </script>
+</body>
+</html>
